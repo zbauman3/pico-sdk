@@ -1,8 +1,14 @@
 #!/bin/bash
 
-#
-# Expected env vars: PICO_SDK_PATH, PICO_BOARD
-#
+if [ "$PICO_SDK_PATH" = "" ]; then
+  echo "Expected \"\$PICO_SDK_PATH\" to be set."
+  exit 1;
+fi
+
+if [ "$PICO_BOARD" = "" ]; then
+  echo "Expected \"\$PICO_BOARD\" to be set."
+  exit 1;
+fi
 
 if [ ! -f "$PWD/config.json" ]; then
   echo "Unable to find \"$PWD/config.json\""
@@ -18,6 +24,10 @@ if [ "$1" = "build-all" ]; then
   (cd ./build && cmake ../ && make);
 elif [ "$1" = "upload" ]; then
   name=$(jq --raw-output ".name // empty" ./config.json);
+  if [ "$name" = "" ]; then
+    echo "Expected \"./config.json\" to contain \"name\"."
+    exit 1;
+  fi
   (cd ./build && picotool load -v "./$name.uf2" -f);
 elif [ "$1" = "build" ]; then
   (cd ./build && make);
