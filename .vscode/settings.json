@@ -6,7 +6,8 @@
     "config.h": "c",
     "version.h": "c",
     "stdio.h": "c",
-    "hello.pio.h": "c"
+    "blink.pio.h": "c",
+    "stdlib.h": "c"
   },
   "cmake.environment": {
     "PICO_SDK_PATH": "/Users/zanebauman/code/bin/pico-sdk-1.5.1",

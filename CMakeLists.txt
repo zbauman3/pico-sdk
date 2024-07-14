@@ -15,7 +15,7 @@ pico_sdk_init()
 
 add_executable("${CONF_NAME}")
 
-pico_generate_pio_header("${CONF_NAME}" "${CMAKE_CURRENT_LIST_DIR}/src/hello.pio")
+pico_generate_pio_header("${CONF_NAME}" "${CMAKE_CURRENT_LIST_DIR}/src/blink.pio")
 
 target_sources("${CONF_NAME}" PRIVATE "${CMAKE_CURRENT_LIST_DIR}/src/${CONF_ENTRY}")
 
