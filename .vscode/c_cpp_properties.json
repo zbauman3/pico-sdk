@@ -5,7 +5,8 @@
       "name": "Mac",
       "includePath": [
         "/Users/zanebauman/code/bin/pico-sdk-1.5.1/src/**/include",
-        "${workspaceFolder}/build/generated/**"
+        "${workspaceFolder}/build/generated/**",
+        "${workspaceFolder}/build/*"
       ],
       "defines": [
         "PICO_BOARD=adafruit_kb2040"

@@ -4,7 +4,9 @@
     "gpio.h": "c",
     "pico.h": "c",
     "config.h": "c",
-    "version.h": "c"
+    "version.h": "c",
+    "stdio.h": "c",
+    "hello.pio.h": "c"
   },
   "cmake.environment": {
     "PICO_SDK_PATH": "/Users/zanebauman/code/bin/pico-sdk-1.5.1",
