@@ -3,7 +3,7 @@
 #include "pico/stdlib.h"
 #include <stdio.h>
 
-const uint LED_PIN = 25;
+const uint LED_PIN = 2;
 
 int main() {
 
@@ -19,7 +19,7 @@ int main() {
     gpio_put(LED_PIN, 0);
     sleep_ms(250);
     gpio_put(LED_PIN, 1);
-    puts("Hello World\n");
-    sleep_ms(1000);
+    puts("Hello World");
+    sleep_ms(5000);
   }
 }
