@@ -1,0 +1,18 @@
+{
+  "files.associations": {
+    "*.ino": "cpp",
+    "gpio.h": "c",
+    "pico.h": "c",
+    "config.h": "c",
+    "version.h": "c"
+  },
+  "cmake.environment": {
+    "PICO_SDK_PATH": "/Users/zanebauman/code/bin/pico-sdk-1.5.1",
+    "PICO_BOARD": "adafruit_kb2040"
+  },
+  "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+  "terminal.integrated.env.osx": {
+    "PICO_SDK_PATH": "/Users/zanebauman/code/bin/pico-sdk-1.5.1",
+    "PICO_BOARD": "adafruit_kb2040"
+  }
+}

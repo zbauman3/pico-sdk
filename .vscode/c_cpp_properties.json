@@ -1,0 +1,16 @@
+// https://code.visualstudio.com/docs/cpp/c-cpp-properties-schema-reference
+{
+  "configurations": [
+    {
+      "name": "Mac",
+      "includePath": [
+        "/Users/zanebauman/code/bin/pico-sdk-1.5.1/src/**/include",
+        "${workspaceFolder}/build/generated/**"
+      ],
+      "defines": [
+        "PICO_BOARD=adafruit_kb2040"
+      ]
+    }
+  ],
+  "version": 4
+}
