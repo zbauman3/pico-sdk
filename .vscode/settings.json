@@ -7,7 +7,8 @@
     "version.h": "c",
     "stdio.h": "c",
     "blink.pio.h": "c",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "*.pio": "platformio-debug.asm"
   },
   "cmake.environment": {
     "PICO_SDK_PATH": "/Users/zanebauman/code/bin/pico-sdk-1.5.1",

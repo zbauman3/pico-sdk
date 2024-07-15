@@ -13,11 +13,14 @@ static inline void blink_pio_init(PIO pio, uint sm, uint offset, uint pin) {
   pio_sm_config c = blink_program_get_default_config(offset);
   // Map the state machine's OUT pin group to one pin, namely the `pin`
   // parameter to this function.
-  sm_config_set_out_pins(&c, pin, 1);
+  sm_config_set_out_pins(&c, pin, 2);
+  // shift right, auto pull enabled, pull threshold of 2
+  sm_config_set_out_shift(&c, true, true, 2);
   // Set this pin's GPIO function (connect PIO to the pad)
   pio_gpio_init(pio, pin);
+  pio_gpio_init(pio, pin + 1);
   // Set the pin direction to output at the PIO
-  pio_sm_set_consecutive_pindirs(pio, sm, pin, 1, true);
+  pio_sm_set_consecutive_pindirs(pio, sm, pin, 2, true);
   // Load our configuration, and jump to the start of the program
   pio_sm_init(pio, sm, offset, &c);
   // Set the state machine running
@@ -42,20 +45,12 @@ int main() {
   uint sm1 = pio_claim_unused_sm(pio, true);
   blink_pio_init(pio, sm1, offset, 2);
 
-  // an another
-  uint sm2 = pio_claim_unused_sm(pio, true);
-  blink_pio_init(pio, sm2, offset, 3);
-
   // The state machine is now running. Any value we push to its TX FIFO will
   // appear on the LED pin.
   while (true) {
-    // Blink
-    pio_sm_put_blocking(pio, sm1, 1);
-    pio_sm_put_blocking(pio, sm2, 0);
-    sleep_ms(500);
-    // Blonk
-    pio_sm_put_blocking(pio, sm1, 0);
-    pio_sm_put_blocking(pio, sm2, 1);
-    sleep_ms(500);
+    pio_sm_put_blocking(pio, sm1, 0b01);
+    sleep_ms(100);
+    pio_sm_put_blocking(pio, sm1, 0b10);
+    sleep_ms(100);
   }
 }
