@@ -2,9 +2,18 @@ cmake_minimum_required(VERSION 3.13)
 
 include(pico_sdk_import.cmake)
 
-file(READ ${CMAKE_CURRENT_SOURCE_DIR}/config.json MY_JSON_STRING)
-string(JSON CONF_ENTRY GET ${MY_JSON_STRING} entry)
-string(JSON CONF_NAME GET ${MY_JSON_STRING} name)
+execute_process(COMMAND jq --raw-output ".entry" ${CMAKE_CURRENT_LIST_DIR}/config.json
+  OUTPUT_VARIABLE CONF_ENTRY
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+execute_process(COMMAND jq --raw-output ".name" ${CMAKE_CURRENT_LIST_DIR}/config.json
+  OUTPUT_VARIABLE CONF_NAME
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+execute_process(COMMAND jq --raw-output ".pio // empty" ${CMAKE_CURRENT_LIST_DIR}/config.json
+  OUTPUT_VARIABLE CONF_PIO_NAME
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+)
 
 project("${CONF_NAME}_project" C CXX ASM)
 
@@ -15,7 +24,9 @@ pico_sdk_init()
 
 add_executable("${CONF_NAME}")
 
-pico_generate_pio_header("${CONF_NAME}" "${CMAKE_CURRENT_LIST_DIR}/src/blink.pio")
+if(NOT (CONF_PIO_NAME STREQUAL ""))
+  pico_generate_pio_header("${CONF_NAME}" "${CMAKE_CURRENT_LIST_DIR}/src/${CONF_PIO_NAME}")
+endif()
 
 target_sources("${CONF_NAME}" PRIVATE "${CMAKE_CURRENT_LIST_DIR}/src/${CONF_ENTRY}")
 

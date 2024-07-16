@@ -1,7 +1,5 @@
 {
-  "entry": "main.c",
   "name": "test-project",
-  "pio": [
-    "blink"
-  ]
+  "entry": "main.c",
+  "pios": "blink.pio"
 }
